@@ -14,9 +14,9 @@ $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . '/src/Edu
 // );
 $conn = array(
   'dbname' => 'edusite_db',
-  'user' => 'edusite_db',
-  'password' => 'edusite_db',
-  'host' => 'db4free.net',
+  'user' => 'root',
+  'password' => '',
+  'host' => 'localhost',
   'driver' => 'pdo_mysql'
 );
 
