@@ -1,0 +1,138 @@
+{% extends "user/user.base.html" %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Input Data Pegawai Non PNS</div>
+        <div class="panel-body">
+            <form method="POST" action="/app/actions/savePegawaiPns.php">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Nama</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nama" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">NUPTK</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nip" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Gol/Ruangan</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="golongan" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">L/P</label>
+                    <div class="col-sm-8">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="jk" value="1" checked> Laki - Laki
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="jk" value="0" checked> Perempuan
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Tempat Lahir</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="tempatLahir" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Tanggal Lahir</label>
+                    <div class="col-sm-8">
+                        <input type="date" name="tanggalLahir" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Jabatan</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="jabatan" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Status</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="status" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Pendidikan Terakhir</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="pendTerakhir">
+                            <option value="1">SLTA</option>
+                            <option value="2">D1</option>
+                            <option value="3">D2</option>
+                            <option value="4">S1</option>
+                            <option value="5">S2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-default">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Data Pegawai PNS</div>
+        <div class="panel-body">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Jabatan</th>
+                        <th>Status</th>
+                        <th>
+                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>
+                                <div class="compact-cell">
+                                    <div class="top">{{item.nama|e}}</div>
+                                    <div class="middle">
+                                        {{item.nuptk|e}}, {{item.golongan|e}}
+                                    </div>
+                                    <div class="bottom">
+                                        {{item.tempatLahir|e}}, {{item.tanggalLahir|e}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ item.jabatan|e }}</td>
+                            <td>{{ item.status|e }}</td>
+                            <td>
+                                <a href="/app/user/index.php?menu=fasilitas&page=update&id={{ item.id|e }}" class="btn btn-sm btn-primary">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <button class="btn btn-sm btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

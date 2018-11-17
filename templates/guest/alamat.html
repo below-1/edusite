@@ -1,0 +1,49 @@
+{% extends "guest/guest.base.html" %}
+
+{% block content %}
+    <div class="info-card">
+        <div class="info-card-header">
+            <div class="filler"></div>
+            <div class="title">Alamat</div>
+        </div>
+        <div class="info-card-body">
+            <div class="row">
+                <div class="label">Alamat</div>
+                <div class="value">{{ sekolah.alamat }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Provinsi</div>
+                <div class="value">{{ sekolah.provinsi }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Kabupaten</div>
+                <div class="value">{{ sekolah.kabupaten }}</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Kecamatan</div>
+                <div class="value">{{ sekolah.kecamatan }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Kelurahan/Desa</div>
+                <div class="value">{{ sekolah.kelurahanDesa }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Kode Pos</div>
+                <div class="value">{{ sekolah.kodePos }}</div>
+            </div>
+            <div class="row">
+                <div class="label">IMB</div>
+                <div class="value">{{ sekolah.imb }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Email</div>
+                <div class="value">{{ sekolah.email }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Telepon</div>
+                <div class="value">{{ sekolah.telepon }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "user/user.base.html" %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Input Data Fasilitas Baru</div>
+        <div class="panel-body">
+            <form method="POST" action="/app/actions/updateFasilitas.php">
+                <input type="number" name="id" value="{{ f.id }}" class="form-control" style="display: none;">
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Nama</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nama" class="form-control" value="{{ f.nama|e }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Jumlah</label>
+                    <div class="col-sm-8">
+                        <input type="number" min="0" name="jumlah" class="form-control" value="{{ f.jumlah|e }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Kondisi</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="kondisi" class="form-control" value="{{ f.kondisi|e }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-10">
+                    <button type="submit" class="btn btn-default">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

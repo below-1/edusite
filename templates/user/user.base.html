@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{ include('commons/head.html') }}
+		<link rel="stylesheet" href="/static/css/main.css">
+    </head>
+	<body>
+
+		<!-- Header -->
+		{{ include('commons/header-user.html') }}
+		<!-- /Header -->
+
+		<!-- Home -->
+		<div id="home" class="hero-area" style="height: 120px; margin-top: 50px;">
+			<!-- Backgound Image -->
+			<div class="bg-image bg-parallax overlay" style="background-image:url(/static/img/home-background.jpg)"></div>
+			<!-- /Backgound Image -->
+
+			<div class="home-wrapper">
+				<div class="container-fluid">
+					<h1 class="white-text">{{ sekolah.nama }}</h1>
+					{% if sekolah.kategori == 1 %}
+					<div class="andy-label paud">
+						PAUD
+					</div>
+					{% elseif sekolah.kategori == 2 %}
+						<div class="andy-label tk">
+							TK
+						</div>
+					{% elseif sekolah.kategori == 3 %}
+						<div class="andy-label sd">
+							SD
+						</div>
+					{% elseif sekolah.kategori == 4 %}
+						<div class="andy-label smp">
+							SMP
+						</div>
+					{% endif %}
+				</div>
+			</div>
+
+		</div>
+		<!-- /Home -->
+
+		<!-- About -->
+		<div id="about" class="section" style="padding-top: 64px; padding-bottom: 24px;">
+
+			<!-- container -->
+			<div class="container-fluid">
+
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-3">
+						{% if (sekolah.kategori == 3 or sekolah.kategori == 4) %}
+							<div class="user-left-nav visible-md visible-lg" data-spy="affix" data-offset-top="60" data-offset-bottom="300">
+								<div class="elem">
+									<a href="/app/user/index.php?menu=biodata">Biodata Sekolah</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=alamat">Alamat</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=siswaperkelas">Jumlah Siswa Per Kelas</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=siswaperrb">Jumlah Siswa Per Rombongan Belajar</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=lanjutstudi">Melanjutkan Studi</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=tingkatlulus">Tingkat Kelulusan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=fasilitas">Fasilitas Olahraga</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=pegawaipns">Data Pegawai</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=bangunan">Bangunan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=bantuan">Bantuan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=image">Gambar</a>
+								</div>
+							</div>
+
+							<div class="user-left-nav visible-xs visible-sm">
+								<div class="elem">
+									<a href="/app/user/index.php?menu=biodata">Biodata Sekolah</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=alamat">Alamat</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=siswaperkelas">Jumlah Siswa Per Kelas</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=siswaperrb">Jumlah Siswa Per Rombongan Belajar</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=lanjutstudi">Melanjutkan Studi</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=tingkatlulus">Tingkat Kelulusan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=fasilitas">Fasilitas Olahraga</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=pegawaipns">Data Pegawai</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=bangunan">Bangunan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=bantuan">Bantuan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=image">Gambar</a>
+								</div>
+							</div>
+						{% elseif (sekolah.kategori == 1) or (sekolah.kategori == 2) %}
+							<div class="user-left-nav visible-md visible-lg" data-spy="affix" data-offset-top="60" data-offset-bottom="300">
+								<div class="elem">
+									<a href="/app/user/index.php?menu=biodata">Biodata Sekolah</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=alamat">Alamat</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=paudjumlahsiswa">Jumlah Siswa</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=pegawaipns">Data Pegawai</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=bangunan">Bangunan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=bantuan">Bantuan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=image">Gambar</a>
+								</div>
+							</div>
+
+							<div class="user-left-nav visible-xs visible-sm">
+								<div class="elem">
+									<a href="/app/user/index.php?menu=biodata">Biodata Sekolah</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=alamat">Alamat</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=paudjumlahsiswa">Jumlah Siswa</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=pegawaipns">Data Pegawai</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=bangunan">Bangunan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=bantuan">Bantuan</a>
+								</div>
+								<div class="elem">
+									<a href="/app/user/index.php?menu=image">Gambar</a>
+								</div>
+							</div>
+						{% endif %}
+
+					</div>
+
+					<div class="col-md-9 col-sm-12">
+						{% block content %}{% endblock %}
+					</div>
+
+				</div>
+				<!-- row -->
+
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /About -->
+
+		<!-- Footer -->
+		{{ include('commons/footer.html') }}
+		<!-- /Footer -->
+
+		<!-- preloader -->
+		<div id='preloader'><div class='preloader'></div></div>
+		<!-- /preloader -->
+
+		{{ include('commons/bottom-script.html') }}
+		
+	</body>
+</html>

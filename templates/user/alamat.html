@@ -1,0 +1,66 @@
+{% extends "user/user.base.html" %}
+
+{% block content %}
+    <div class="panel panel-warning">
+        <div class="panel-heading">Alamat</div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="POST" action="/app/actions/saveAlamat.php">
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Alamat</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="alamat" class="form-control" value="{{ sekolah.alamat }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Kelurahan / Desa</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="kelurahanDesa" class="form-control" value="{{ sekolah.kelurahanDesa }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Kabupaten</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="kabupaten" class="form-control" value="{{ sekolah.kabupaten }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Provinsi</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="provinsi" class="form-control" value="{{ sekolah.provinsi }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Kode Pos</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="kodePos" class="form-control" value="{{ sekolah.kodePos }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Telepon / HP</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="telepon" class="form-control" value="{{ sekolah.telepon }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" name="email" class="form-control" value="{{ sekolah.email }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-10">
+                    <button type="submit" class="btn btn-default">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

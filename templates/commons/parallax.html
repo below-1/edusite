@@ -1,0 +1,23 @@
+<!-- Home -->
+<div id="home" class="hero-area">
+        <!-- Backgound Image -->
+        <div class="bg-image bg-parallax overlay" style="background-image:url(/static/img/home-background.jpg)"></div>
+        <!-- /Backgound Image -->
+
+        <div class="home-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 class="white-text">Edusite, Web Data Sekolah</h1>
+                        {% if (sekolahId is defined) %}
+                            <a class="main-button icon-button" href="/app/user/index.php">Get Started!</a>
+                        {% else %}
+                            <a class="main-button icon-button" href="/app/register.php">Get Started!</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Home -->

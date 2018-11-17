@@ -1,0 +1,191 @@
+.user-left-nav .elem {
+    font-size: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.user-left-nav .elem > a {
+    color: #666;
+}
+
+.user-left-nav .elem:hover {
+    border-left: 2px solid dodgerblue;
+    padding-left: 8px;
+}
+.user-left-nav .elem:hover > a {
+    color: black;
+    font-size: 13px;
+}
+
+.affix {
+    top: 80px;
+    position: fixed;
+}
+
+.affix-bottom {
+    position: absolute;
+}
+
+#header {
+    border-bottom: 1px solid #CCC;
+}
+
+.compact-cell .top {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+.compact-cell .middle {
+    font-size: 14px;
+    font-weight: lighter;
+}
+.compact-cell .bottom {
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+body {
+    font-size: 12px;
+    color: #333;
+    /* font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; */
+}
+
+.andy-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+}
+
+.andy-label.paud {
+    background-color: dodgerblue;
+}
+
+.andy-label.tk {
+    background-color: magenta;
+}
+
+.andy-label.sd {
+    background-color: rebeccapurple;
+}
+
+.andy-label.smp {
+    background-color: teal;
+}
+
+.table > tbody > tr > td {
+    font-size: 14px;
+}
+
+.form-control-static {
+    font-size: 14px;
+}
+
+#second-nav {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(240, 240, 250);
+    margin-bottom: 0;
+    flex-wrap: wrap-reverse;
+    position: sticky;
+    top: 0;
+    z-index: 45;
+}
+
+#second-nav .resp-nav-item {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    font-size: 12px;
+    flex-grow: 1;
+    font-weight: lighter;
+    background-color: rgb(245, 245, 250);
+    display: flex;
+    justify-content: center;
+}
+
+#second-nav .resp-nav-item:hover {
+    background-color: dodgerblue;
+    color: white;
+    font-weight: bold;
+}
+
+.info-card {
+    box-shadow: 0 0 24px rgba(0,0,0,0.2);
+    background-color: rgb(250, 250, 250);
+    max-width: 500px;
+    margin: 0 auto;
+}
+.info-card .info-card-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #DDD;
+}
+.info-card .info-card-header .title {
+    padding: 12px;
+    padding-top: 28px;
+    text-transform: uppercase;
+}
+
+.info-card .info-card-header .filler {
+    position: absolute;
+    top: 0;
+    background-color: teal;
+    width: 80px;
+    height: 23px;
+}
+.info-card .info-card-body .row {
+    margin: 0;
+    padding: 12px;
+    border-bottom: 1px solid #EEE;
+    transition: all .3s;
+}
+
+.info-card .info-card-body .row:hover {
+    background-color: rgb(245, 245, 245);
+}
+
+.info-card .info-card-body .row .label {
+    color: black;
+    font-weight: bold;
+    font-size: 13px;
+    padding-left: 8px;
+}
+.info-card .info-card-body .row .value {
+    color: #333;
+    font-size: 14px;
+    padding-top: 4px;
+    padding-left: 8px;
+}
+
+#about {
+    background-color: rgb(250, 250, 250);
+    /* background-image: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.6)), url(/static/img/cta1-background.jpg); */
+    background-position: contain;
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.navbar-brand .logo {
+    margin-top: 0;
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mobile-nav .resp-nav-item {
+    display: block;
+    font-size: 14px;
+    border-bottom: 1px solid #CCC;
+    padding: 12px 0;
+}

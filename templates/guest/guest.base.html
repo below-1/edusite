@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{ include('commons/head.html') }}
+		<link rel="stylesheet" href="/static/css/main.css">
+    </head>
+	<body>
+
+		<!-- Header -->
+		{% if sekolahId is defined %}
+			<header id="header">
+				<div class="container-fluid">
+			
+					<div class="navbar-header">
+						<!-- Logo -->
+						<div class="navbar-brand">
+							<a class="logo" href="index.html">
+								<img src="/static/img/logo.png" alt="logo">
+							</a>
+						</div>
+						<!-- /Logo -->
+			
+						<!-- Mobile toggle -->
+						<button class="navbar-toggle">
+							<span></span>
+						</button>
+						<!-- /Mobile toggle -->
+					</div>
+			
+					<!-- Navigation -->
+					<nav id="nav">
+						<ul class="main-menu nav navbar-nav navbar-right">
+							<li><a href="/app/browse.php">Browse</a></li>
+							<li><a href="/app/user/index.php">Profile</a></li>
+							<li><a href="/app/actions/logout.php">Log Out</a></li>
+						</ul>
+					</nav>
+					<!-- /Navigation -->
+			
+				</div>
+			</header>
+		{% else %}
+			<header id="header">
+				<div class="container-fluid">
+			
+					<div class="navbar-header">
+						<!-- Logo -->
+						<div class="navbar-brand">
+							<a class="logo" href="index.html">
+								<img src="/static/img/logo.png" alt="logo">
+							</a>
+						</div>
+						<!-- /Logo -->
+			
+						<!-- Mobile toggle -->
+						<button class="navbar-toggle">
+							<span></span>
+						</button>
+						<!-- /Mobile toggle -->
+					</div>
+			
+					<!-- Navigation -->
+					<nav id="nav">
+						<ul class="main-menu nav navbar-nav navbar-right">
+							<li><a href="/app/browse.php">Browse</a></li>
+							<li><a href="/app/register.php">Sign Up</a></li>
+							<li><a href="/app/login.php">Log In</a></li>
+						</ul>
+					</nav>
+					<!-- /Navigation -->
+			
+				</div>
+			</header>
+		{% endif %}
+        <!-- /Header -->
+        
+
+		<!-- Home -->
+		<div id="home" class="hero-area" style="height: 120px;">
+			<!-- Backgound Image -->
+			<div class="bg-image bg-parallax overlay" style="background-image:url(/static/img/home-background.jpg)"></div>
+			<!-- /Backgound Image -->
+
+			<div class="home-wrapper">
+				<div class="container-fluid">
+					<h1 class="white-text">{{ sekolah.nama }}</h1>
+				</div>
+			</div>
+
+		</div>
+        <!-- /Home -->
+		
+		
+		{% if (sekolah.kategori == 3 or sekolah.kategori == 4) %}
+        <div id="second-nav" class="hidden-xs hidden-sm">
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=biodata&sekolahId={{ sekolah.id }}">
+                Biodata
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=alamat&sekolahId={{ sekolah.id }}">
+                Alamat
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=siswaperkelas&sekolahId={{ sekolah.id }}">
+                Siswa Per Kelas
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=siswaperrb&sekolahId={{ sekolah.id }}">
+                Siswa per Rombongan
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=tingkatlulus&sekolahId={{ sekolah.id }}">
+                Tingkat Kelulusan
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=lanjutstudi&sekolahId={{ sekolah.id }}">
+                Lanjut Pendidikan
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=fasilitas&sekolahId={{ sekolah.id }}">
+                Fasilitas Olahraga
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=pegawai&sekolahId={{ sekolah.id }}">
+                Pegawai
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=bantuan&sekolahId={{ sekolah.id }}">
+                Bantuan
+            </a>
+            <a class="resp-nav-item" href="/app/guest/index.php?menu=bangunan&sekolahId={{ sekolah.id }}">
+                Bangunan
+            </a>
+		</div>
+		{% elseif (sekolah.kategori == 1 or sekolah.kategori == 2) %}
+        <div id="second-nav" class="hidden-xs hidden-sm">
+			<a class="resp-nav-item" href="/app/guest/index.php?menu=biodata&sekolahId={{ sekolah.id }}">
+				Biodata
+			</a>
+			<a class="resp-nav-item" href="/app/guest/index.php?menu=alamat&sekolahId={{ sekolah.id }}">
+				Alamat
+			</a>
+			<a class="resp-nav-item" href="/app/guest/index.php?menu=fasilitas&sekolahId={{ sekolah.id }}">
+				Fasilitas Olahraga
+			</a>
+			<a class="resp-nav-item" href="/app/guest/index.php?menu=pegawai&sekolahId={{ sekolah.id }}">
+				Pegawai
+			</a>
+			<a class="resp-nav-item" href="/app/guest/index.php?menu=bantuan&sekolahId={{ sekolah.id }}">
+				Bantuan
+			</a>
+			<a class="resp-nav-item" href="/app/guest/index.php?menu=bangunan&sekolahId={{ sekolah.id }}">
+				Bangunan
+			</a>
+		</div>
+		{% endif %}
+
+		<!-- second menu for mobile -->
+		<div class="row visible-xs visible-sm">
+			<div class="col-sm-12">
+				<button class="btn btn-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					Menu
+				</button>
+				<div class="collapse" id="collapseExample">
+					<div class="well mobile-nav">
+						<a class="resp-nav-item" href="/app/guest/index.php?menu=biodata&sekolahId={{ sekolah.id }}">
+							Biodata
+						</a>
+						<a class="resp-nav-item" href="/app/guest/index.php?menu=alamat&sekolahId={{ sekolah.id }}">
+							Alamat
+						</a>
+						<a class="resp-nav-item" href="/app/guest/index.php?menu=fasilitas&sekolahId={{ sekolah.id }}">
+							Fasilitas Olahraga
+						</a>
+						<a class="resp-nav-item" href="/app/guest/index.php?menu=pegawai&sekolahId={{ sekolah.id }}">
+							Pegawai
+						</a>
+						<a class="resp-nav-item" href="/app/guest/index.php?menu=bantuan&sekolahId={{ sekolah.id }}">
+							Bantuan
+						</a>
+						<a class="resp-nav-item" href="/app/guest/index.php?menu=bangunan&sekolahId={{ sekolah.id }}">
+							Bangunan
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- About -->
+		<div id="about" class="section" style="padding-top: 64px; padding-bottom: 24px;">
+
+			<!-- container -->
+			<div class="container-fluid">
+
+				<!-- row -->
+				<div class="row">
+
+					<!-- <div class="col-md-3">
+						<div class="user-left-nav" data-spy="affix" data-offset-top="60" data-offset-bottom="300">
+							<div class="elem">
+								<a href="/app/user/index.php?menu=biodata">Biodata Sekolah</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=alamat">Alamat</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=siswaperkelas">Jumlah Siswa Per Kelas</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=siswaperrb">Jumlah Siswa Per Rombongan Belajar</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=lanjutstudi">Melanjutkan Studi</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=tingkatlulus">Tingkat Kelulusan</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=fasilitas">Fasilitas Olahraga</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=pegawaipns">Data Pegawai</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=bangunan">Bangunan</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=bantuan">Bantuan</a>
+							</div>
+							<div class="elem">
+								<a href="/app/user/index.php?menu=image">Gambar</a>
+							</div>
+						</div>
+
+					</div> -->
+
+					<div class="col-md-10 col-md-offset-1 col-sm-12">
+						{% block content %}{% endblock %}
+					</div>
+
+				</div>
+				<!-- row -->
+
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /About -->
+
+		{{ include('commons/footer.html') }}
+		<!-- /Footer -->
+
+		<!-- preloader -->
+		<div id='preloader'><div class='preloader'></div></div>
+		<!-- /preloader -->
+
+		{{ include('commons/bottom-script.html') }}
+		
+	</body>
+</html>

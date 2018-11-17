@@ -1,0 +1,38 @@
+{% extends "guest/guest.base.html" %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Data Fasilitas</div>
+        <div class="panel-body">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Jumlah</th>
+                        <th>Kondisi</th>
+                        <th>
+                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.nama|e }}</td>
+                            <td>{{ item.jumlah|e }}</td>
+                            <td>{{ item.kondisi|e }}</td>
+                            <td>
+                                <a href="/app/user/index.php?menu=fasilitas&page=update&id={{ item.id|e }}" class="btn btn-sm btn-primary">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <button class="btn btn-sm btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

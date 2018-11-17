@@ -1,0 +1,28 @@
+{% extends "guest/guest.base.html" %}
+
+{% block content %}
+    <div class="panel panel-primary" style="max-width: 500px; margin: 0 auto;">
+        <div class="panel-heading">Data tingkat kelulusan</div>
+        <div class="panel-body">
+            <table class="table table-condensed table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Tahun</th>
+                        <th>Jumlah</th>
+                        <th>
+                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.tahun|e }}</td>
+                            <td>{{ item.jumlahLulus|e }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

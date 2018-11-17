@@ -1,0 +1,42 @@
+{% extends "guest/guest.base.html" %}
+
+{% set isSmp = sekolah.kategori == 4 %}
+{% set isSd = sekolah.kategori == 3 %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Data Siswa Per Kelas</div>
+        <div class="panel-body">
+            <table class="table table-condensed table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Tahun</th>
+                        <th>Kelas I</th>
+                        <th>Kelas II</th>
+                        <th>Kelas III</th>
+                        {% if isSd %}
+                        <th>Kelas IV</th>
+                        <th>Kelas V</th>
+                        <th>Kelas VI</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.tahun|e }}</td>
+                            <td>{{ item.js1|e }}</td>
+                            <td>{{ item.js2|e }}</td>
+                            <td>{{ item.js3|e }}</td>
+                            {% if isSd %}
+                            <td>{{ item.js4|e }}</td>
+                            <td>{{ item.js5|e }}</td>
+                            <td>{{ item.js6|e }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
