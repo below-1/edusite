@@ -68,6 +68,111 @@
             </div>
         </div>
 
+        <div id="about" class="section" style="background-color: rgb(250, 250, 250); padding-top: 10px; padding-bottom: 10px; text-align-center; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
+        </div>
+        <div class="container-fluid total-desc-wrap well well-lg">
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="total-desc">
+                        <div class="head">PAUD</div>
+                        <div class="body">{{ kategoriCount[0]['total'] }}</div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="total-desc">
+                        <div class="head">TK</div>
+                        <div class="body">{{ kategoriCount[1]['total'] }}</div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="total-desc">
+                        <div class="head">SD</div>
+                        <div class="body">{{ kategoriCount[2]['total'] }}</div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="total-desc">
+                        <div class="head">SMP</div>
+                        <div class="body">{{ kategoriCount[3]['total'] }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="vueApp">
+            <div class="container-fluid" style="background-color: white; position: relative; padding: 0;">
+                <div id="kecamatan-panel">
+                    <h5>Pilih Kecamatan</h5>
+                    {% raw %}
+                        <div class="checkbox" v-for="(k, j) in kecamatan" :key="k.name" style=" border-bottom: 1px solid #CCC;">
+                            <div style="display: flex; align-items: center; padding-bottom: 12px;">
+                                <input type="checkbox" style="position: static; margin-left: 0;"
+                                    v-on:click="changeSelected(j)"
+                                    v-bind:checked="k.selected"/>
+                                <span style="margin-left: 8px; font-size: 16px; display: inline-block;">{{ k.name }}</span>
+                            </div>
+                        </div>
+                    {% endraw %}
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="map" style="height: 400px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="summary-panel" class="container-fluid well well-lg">
+                <div class="row">
+                    <div class="kategori-box col-sm-3">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Rangkuman Per Kategori
+                            </div>
+                            <table class='table table-hover table-striped'>
+                                <thead>
+                                    <tr>
+                                        <td>Kategori</td>
+                                        <td>Jumlah</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% raw %}
+                                    <tr v-for="(it, i) in kategori" :key="i">
+                                        <td>{{ it.nama }}</td>
+                                        <td>{{ it.total }}</td>
+                                    </tr>
+                                    {% endraw %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="akreditasi-box col-sm-3">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Rangkuman Akreditasi
+                            </div>
+                            <table class='table table-hover table-striped'>
+                                <thead>
+                                    <tr>
+                                        <td>Akreditasi</td>
+                                        <td>Jumlah</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% raw %}
+                                    <tr v-for="(it, i) in akreditasi" :key="i">
+                                        <td>{{ it.akreditasi }}</td>
+                                        <td>{{ it.total }}</td>
+                                    </tr>
+                                    {% endraw %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 		<!-- Footer -->
 		<footer id="footer" class="section">
 
@@ -183,6 +288,144 @@
                     }
                     
                 });
+            });
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1UhV7s_4c-E3p33HyK_P-N7uEs8qqfpg&language=id&region=ID"></script>
+
+        <script type="text/javascript">
+            var map;
+            var gmarkers = [];
+            var infowindow = new google.maps.InfoWindow();
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: -9.859565, lng: 124.278409},
+                    zoom: 16,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+                
+                var locations = [
+                    {% for it in mapItems %}
+                        ["{{ it['nama'] }}", {{ it['latitude'] }}, {{ it['longitude'] }}, 4, {{ it['id'] }}],
+                    {% endfor %}
+                ];
+
+                var marker, i;
+
+                for (i = 0; i < locations.length; i++) {  
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        map: map
+                    });
+                    gmarkers.push(marker);
+
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(`<div><a href="/app/guest/index.php?sekolahId=${locations[i][4]}">${locations[i][0]}</a></div>`);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }
+            }
+            
+
+            google.maps.event.addDomListener(window, 'load', initMap);
+        </script>
+        <script src="/static/js/vue.js"></script>
+        <script src="/static/js/axios.min.js"></script>
+        <script>
+            var vueApp = new Vue({
+                el: '#vueApp',
+                data: {
+                    message: 'Hello Vue!',
+                    kecamatan: [],
+                    kategori: [],
+                    akreditasi: []
+                },
+                computed: {
+                    selectedKec () {
+                        return this.kecamatan.filter(k => k.selected).map(k => k.name);
+                    }
+                },
+                mounted () {
+                    axios('/app/api/kecamatan.php')
+                        .then(resp => resp.data)
+                        .then(items => {
+                            this.kecamatan = items.map(it => {
+                                return { name: it.nama, selected: true };
+                            });
+                        })
+                        .then(() => { this.reload(); });
+                },
+                methods: {
+                    reload () {
+                        axios.post('/app/api/summary.php', { kecamatan: this.selectedKec })
+                            .then(resp => resp.data)
+                            .then(items => {
+                                this.akreditasi = items.akreditasi;
+                                this.kategori = items.kategori.map(it => {
+                                    switch (parseInt(it.kategori)) {
+                                        case 1:
+                                            it.nama = 'PAUD';
+                                            break;
+                                        case 2:
+                                            it.nama = 'TK';
+                                            break;
+                                        case 3:
+                                            it.nama = 'SD';
+                                            break;
+                                        case 4:
+                                            it.nama = 'SMP';
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    return it;
+                                });
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                            .then(() => {
+                                return this.getSelectedMap()
+                                    .then(items => { this.rebuildMarkers(items); });
+                            });
+                    },
+                    removeMarkers () {
+                        gmarkers.forEach(gm => {
+                            gm.setMap(null);
+                        });
+                    },
+                    rebuildMarkers (items) {
+                        this.removeMarkers();
+                        gmarkers = [];
+                        var marker, i;
+
+                        for (i = 0; i < items.length; i++) {  
+                            marker = new google.maps.Marker({
+                                position: new google.maps.LatLng(items[i]['latitude'], items[i]['longitude']),
+                                map: map
+                            });
+                            gmarkers.push(marker);
+
+                            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                return function() {
+                                    infowindow.setContent(`<div><a href="/app/guest/index.php?sekolahId=${items[i]['id']}">${items[i]['nama']}</a></div>`);
+                                    infowindow.open(map, marker);
+                                }
+                            })(marker, i));
+                        }
+                    },
+                    getSelectedMap () {
+                        return axios.post('/app/api/getSekolahByKecamatan.php', { kecamatan: this.selectedKec })
+                            .then(resp => resp.data);
+                    },
+                    changeSelected (i) {
+                        this.kecamatan[i].selected = !this.kecamatan[i].selected;
+                        Vue.nextTick(() => {
+                            this.reload();
+                        });
+                    }
+                }
             });
         </script>
 	</body>

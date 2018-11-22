@@ -7,8 +7,8 @@
             <table class="table table-responsive">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th></th>
+                        <th>Data Diri</th>
+                        <th>Pendidikan</th>
                         <th>Jabatan</th>
                         <th>Status</th>
                     </tr>
@@ -29,9 +29,6 @@
                             </td>
                             <td>
                                 <div class="compact-cell">
-                                    <div class="middle">
-                                        {{ (item.kategori == 1) ? 'PNS' : 'Non PNS' }}
-                                    </div>
                                     <div class="bottom">
                                         {% if item.pendTerakhir == 1 %}
                                             SLTA
@@ -48,7 +45,14 @@
                                 </div>
                             </td>
                             <td>{{ item.jabatan|e }}</td>
-                            <td>{{ item.status|e }}</td>
+                            <td>
+								<div class="middle">
+                                    {{ (item.kategori == 1) ? 'PNS' : 'Non PNS' }}
+                                </div>
+								<div class="bottom">
+									{{ item.status|e }}
+								</div>
+							</td>
                         </tr>
                     {% endfor %}
                 </tbody>

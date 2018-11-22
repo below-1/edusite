@@ -94,6 +94,16 @@
         die();
     }
 
+    if ($menu == 'alamat') {
+        // Get kecamatan list
+        $kecItems = $entity_manager->getRepository('Edusite\Model\Kecamatan')->findAll();
+        echo $twig->render("user/$menu.html", array(
+            'sekolah' => $sekolah,
+            'kecItems' => $kecItems
+        ));    
+        die();
+    }
+
     echo $twig->render("user/$menu.html", array('sekolah' => $sekolah));
     die();
 

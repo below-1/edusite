@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        {{ include('commons/head.html') }}
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link type="text/css" rel="stylesheet" href="/static/css/mat-card.css"/>
+    </head>
+	<body>
+        <!-- Header -->
+        {% if loggedIn is defined %}
+            {{ include('commons/header-user.html') }}
+        {% else %}
+            {{ include('commons/guest-header.html') }}
+        {% endif %}
+        <!-- /Header -->
+
+        {{ include('commons/parallax.html') }}
+
+        <div id="about" class="section" style="background-color: rgb(250, 250, 250); padding-top: 10px; padding-bottom: 10px; text-align-center; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
+            Lokasi Sekolah
+        </div>
+		
+		<div id="map" style="height: 600px;"></div>
+		
+		<!-- tambahan -->
+		<div class="panel panel-primary">
+            <div class="panel-heading">Data Sebaran Sekolah</div>
+            <div class="panel-body">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Data Diri</th>
+                            <th>Pendidikan</th>
+                            <th>Jabatan</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                            <tr>
+                                <td style="width: 40%;">
+                                    <div class="compact-cell">
+                                        <div class="top">{{item.nama|e}}</div>
+                                        <div class="middle">
+                                            {{item.nss|e}}, {{item.golongan|e}}
+                                        </div>
+                                        <div class="bottom">
+                                            {{item.tempatLahir|e}}, {{item.tanggalLahir|date('Y/m/d')}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="compact-cell">
+                                        <div class="bottom">
+                                            {% if item.pendTerakhir == 1 %}
+                                                SLTA
+                                            {% elseif item.pendTerakhir == 2 %}
+                                                D1
+                                            {% elseif item.pendTerakhir == 3 %}
+                                                D2
+                                            {% elseif item.pendTerakhir == 4 %}
+                                                S1
+                                            {% elseif item.pendTerakhir == 5 %}
+                                                S2
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ item.jabatan|e }}</td>
+                                <td>
+                                    <div class="middle">
+                                        {{ (item.kategori == 1) ? 'PNS' : 'Non PNS' }}
+                                    </div>
+                                    <div class="bottom">
+                                        {{ item.status|e }}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+		<!-- selesai Tambah -->
+
+		<!-- Footer -->
+		<footer id="footer" class="section">
+
+			<!-- container -->
+			<div class="container">
+
+				<!-- row -->
+				<div class="row">
+
+					<!-- footer logo -->
+					<div class="col-md-6">
+						<div class="footer-logo">
+							<a class="logo" href="index.html">
+								<img src="../static/img/logo.png" alt="logo">
+							</a>
+						</div>
+					</div>
+					<!-- footer logo -->
+
+					<!-- footer nav -->
+					<div class="col-md-6">
+						<ul class="footer-nav">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="#">About</a></li>
+							<li><a href="#">Courses</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="contact.html">Contact</a></li>
+						</ul>
+					</div>
+					<!-- /footer nav -->
+
+				</div>
+				<!-- /row -->
+
+				<!-- row -->
+				<div id="bottom-footer" class="row">
+
+					<!-- social -->
+					<div class="col-md-4 col-md-push-8">
+						<ul class="footer-social">
+							<li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
+							<li><a href="#" class="youtube"><i class="fa fa-youtube"></i></a></li>
+							<li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+						</ul>
+					</div>
+					<!-- /social -->
+
+					<!-- copyright -->
+					<div class="col-md-8 col-md-pull-4">
+						<div class="footer-copyright">
+							<span>&copy; Copyright 2018. All Rights Reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com">Colorlib</a></span>
+						</div>
+					</div>
+					<!-- /copyright -->
+
+				</div>
+				<!-- row -->
+
+			</div>
+			<!-- /container -->
+
+		</footer>
+		<!-- /Footer -->
+
+		<!-- preloader -->
+		<div id='preloader'><div class='preloader'></div></div>
+		<!-- /preloader -->
+
+        {{ include('commons/bottom-script.html') }}
+        <script>
+            $(document).ready(function(){
+                var zindex = 10;
+                
+                $("div.card").click(function(e){
+                
+                    var isShowing = false;
+                
+                    if ($(this).hasClass("show")) {
+                    isShowing = true
+                    }
+                
+                    if ($("div.cards").hasClass("showing")) {
+                    // a card is already in view
+                    $("div.card.show")
+                        .removeClass("show");
+                
+                    if (isShowing) {
+                        // this card was showing - reset the grid
+                        $("div.cards")
+                        .removeClass("showing");
+                    } else {
+                        // this card isn't showing - get in with it
+                        $(this)
+                        .css({zIndex: zindex})
+                        .addClass("show");
+                
+                    }
+                
+                    zindex++;
+                
+                    } else {
+                    // no cards in view
+                    $("div.cards")
+                        .addClass("showing");
+                    $(this)
+                        .css({zIndex:zindex})
+                        .addClass("show");
+                
+                    zindex++;
+                    }
+                    
+                });
+            });
+        </script>
+		
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1UhV7s_4c-E3p33HyK_P-N7uEs8qqfpg&language=id&region=ID"></script>
+
+        <script type="text/javascript">
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: -9.859565, lng: 124.278409},
+                    zoom: 11,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+                
+                var locations = [
+                    {% for it in items %}
+                        ["{{ it['nama'] }}", {{ it['latitude'] }}, {{ it['longitude'] }}, 4, {{ it['id'] }}],
+                    {% endfor %}
+                ];
+
+                var infowindow = new google.maps.InfoWindow();
+
+                var marker, i;
+
+                for (i = 0; i < locations.length; i++) {  
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        map: map
+                    });
+
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                        infowindow.setContent(`<div><a href="/app/guest/index.php?sekolahId=${locations[i][4]}">${locations[i][0]}</a></div>`);
+                        infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }
+            }
+            
+
+            google.maps.event.addDomListener(window, 'load', initMap);
+        </script>
+		
+	</body>
+</html>

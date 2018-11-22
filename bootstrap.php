@@ -12,11 +12,15 @@ $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . '/src/Edu
 //   'driver' => 'pdo_sqlite',
 //   'path' => __DIR__ . '/db.sqlite'
 // );
+$DB_NAME = 'edusite_db';
+$DB_USER = 'root';
+$DB_PASSWORD = '';
+$DB_HOST = 'localhost';
 $conn = array(
-  'dbname' => 'edusite_db',
-  'user' => 'root',
-  'password' => '',
-  'host' => 'localhost',
+  'dbname' => $DB_NAME,
+  'user' => $DB_USER,
+  'password' => $DB_PASSWORD,
+  'host' => $DB_HOST,
   'driver' => 'pdo_mysql'
 );
 

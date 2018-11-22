@@ -71,7 +71,13 @@
         $query = $entity_manager->createQuery("SELECT f FROM Edusite\Model\Sekolah s JOIN Edusite\Model\Pegawai f WHERE f.sekolah = $sekolahId ORDER BY f.nama ASC");
         $selectResult = $query->getResult();
         $data['items'] = $selectResult;
-    }  
+    } 
+	
+	if ($menu == 'maps_data') {
+        $query = $entity_manager->createQuery("SELECT * FROM sekolah");
+        $selectResult = $query->getResult();
+        $data['items'] = $selectResult;
+    }
 
     echo $twig->render($page, $data);
     die();
