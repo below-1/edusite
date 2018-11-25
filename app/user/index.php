@@ -63,6 +63,13 @@
     }
 
     if ($menu == 'pegawaipns') {
+        if (!empty($_GET['page']) && !empty($_GET['id'])) {
+            $f = $entity_manager->find('Edusite\Model\Pegawai', $_GET['id']);
+            $data = array('sekolah' => $sekolah,'f' => $f);
+
+            echo $twig->render("user/updatePegawai.html", $data);
+            die();
+        }
         $query = $entity_manager->createQuery("SELECT f FROM Edusite\Model\Sekolah s JOIN Edusite\Model\Pegawai f WHERE f.sekolah = $sekolahId ORDER BY f.nama ASC");
         $selectResult = $query->getResult();
         echo $twig->render("user/$menu.html", array('sekolah' => $sekolah, 'items' => $selectResult));
@@ -70,6 +77,13 @@
     }
 
     if ($menu == 'bangunan') {
+        if (!empty($_GET['page']) && !empty($_GET['id'])) {
+            $f = $entity_manager->find('Edusite\Model\Bangunan', $_GET['id']);
+            $data = array('sekolah' => $sekolah,'b' => $f);
+
+            echo $twig->render("user/updateBangunan.html", $data);
+            die();
+        }
         $query = $entity_manager->createQuery("SELECT f FROM Edusite\Model\Sekolah s JOIN Edusite\Model\Bangunan f WHERE f.sekolah = $sekolahId ORDER BY f.tahun ASC");
         $selectResult = $query->getResult();
         echo $twig->render("user/$menu.html", array('sekolah' => $sekolah, 'items' => $selectResult));
@@ -77,7 +91,14 @@
     }
 
     if ($menu == 'bantuan') {
-        $query = $entity_manager->createQuery("SELECT f FROM Edusite\Model\Sekolah s JOIN Edusite\Model\Bangunan f WHERE f.sekolah = $sekolahId ORDER BY f.tahun ASC");
+        if (!empty($_GET['page']) && !empty($_GET['id'])) {
+            $f = $entity_manager->find('Edusite\Model\Bantuan', $_GET['id']);
+            $data = array('sekolah' => $sekolah,'b' => $f);
+
+            echo $twig->render("user/updateBantuan.html", $data);
+            die();
+        }
+        $query = $entity_manager->createQuery("SELECT f FROM Edusite\Model\Sekolah s JOIN Edusite\Model\Bantuan f WHERE f.sekolah = $sekolahId ORDER BY f.tahun ASC");
         $selectResult = $query->getResult();
         echo $twig->render("user/$menu.html", array('sekolah' => $sekolah, 'items' => $selectResult));
         die();

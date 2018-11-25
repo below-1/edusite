@@ -20,10 +20,11 @@
                                 <div class="compact-cell">
                                     <div class="top">{{item.nama|e}}</div>
                                     <div class="middle">
-                                        {{item.nip|e}}, {{item.golongan|e}}
+                                        NIP: {{item.nip|e}}, Golongan: {{item.golongan|e}}
+                                        
                                     </div>
                                     <div class="bottom">
-                                        {{item.tempatLahir|e}}, {{item.tanggalLahir|date('Y/m/d')}}
+                                        Tempat Tanggal Lahir: {{item.tempatLahir|e}}, {{item.tanggalLahir|date('Y/m/d')}}
                                     </div>
                                 </div>
                             </td>
@@ -47,10 +48,13 @@
                             <td>{{ item.jabatan|e }}</td>
                             <td>
 								<div class="middle">
-                                    {{ (item.kategori == 1) ? 'PNS' : 'Non PNS' }}
+                                    Kategori: {{ (item.kategori == 1) ? 'PNS' : 'Non PNS' }}
+                                </div>
+								<div class="middle">
+                                    Jenis Kelamin: {{ item.tempatLahir|e }}
                                 </div>
 								<div class="bottom">
-									{{ item.status|e }}
+									Status: {{ item.status|e }}
 								</div>
 							</td>
                         </tr>

@@ -16,114 +16,21 @@
 
         {{ include('commons/parallax.html') }}
 
-        <div id="about" class="section" style="background-color: rgb(250, 250, 250); padding-top: 60px;">
-            <div class="cards">
-                {% for it in items %}
-                    <div class="card">
-                        {% if it.kategori == 1 %}
-                            <div class="andy-label paud">
-                                PAUD
-                            </div>
-                        {% elseif it.kategori == 2 %}
-                            <div class="andy-label tk">
-                                TK
-                            </div>
-                        {% elseif it.kategori == 3 %}
-                            <div class="andy-label sd">
-                                SD
-                            </div>
-                        {% elseif it.kategori == 4 %}
-                            <div class="andy-label smp">
-                                SMP
-                            </div>
-                        {% endif %}
-
-                        {% if it.imUrl is null %}
-                            <img src="/static/img/blog01.jpg">
-                        {% else %}
-                            <img src="{{it.imUrl|e}}">
-                        {% endif %}
-                        <div class="card-title">
-                            <a href="#" class="toggle-info btn">
-                            <span class="left"></span>
-                            <span class="right"></span>
-                            </a>
-                            <h2>
-                                {{ it.nama|e }}
-                                <small>{{ it.nss|e }}</small>
-                            </h2>
-                        </div>
-                        <div class="card-flap flap1">
-                            <div class="card-description">
-                            {{it.visi|e}}.
-                            </div>
-                            <div class="card-flap flap2">
-                            <div class="card-actions">
-                                <a href="/app/guest/index.php?sekolahId={{ it.id|e }}" class="btn">Detail</a>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div id="about" class="section" style="background-color: rgb(250, 250, 250); padding-top: 10px; padding-bottom: 10px; text-align-center; font-size: 20px; font-weight: bold; display: flex; justify-content: center;">
-        </div>
-        <div class="container-fluid total-desc-wrap well well-lg">
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="total-desc">
-                        <div class="head">PAUD</div>
-                        <div class="body">{{ kategoriCount[0]['total'] }}</div>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="total-desc">
-                        <div class="head">TK</div>
-                        <div class="body">{{ kategoriCount[1]['total'] }}</div>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="total-desc">
-                        <div class="head">SD</div>
-                        <div class="body">{{ kategoriCount[2]['total'] }}</div>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="total-desc">
-                        <div class="head">SMP</div>
-                        <div class="body">{{ kategoriCount[3]['total'] }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div id="vueApp">
-            <div class="container-fluid" style="background-color: white; position: relative; padding: 0;">
-                <div id="kecamatan-panel">
-                    <h5>Pilih Kecamatan</h5>
-                    {% raw %}
-                        <div class="checkbox" v-for="(k, j) in kecamatan" :key="k.name" style=" border-bottom: 1px solid #CCC;">
-                            <div style="display: flex; align-items: center; padding-bottom: 12px;">
-                                <input type="checkbox" style="position: static; margin-left: 0;"
-                                    v-on:click="changeSelected(j)"
-                                    v-bind:checked="k.selected"/>
-                                <span style="margin-left: 8px; font-size: 16px; display: inline-block;">{{ k.name }}</span>
-                            </div>
-                        </div>
-                    {% endraw %}
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="map" style="height: 400px;"></div>
-                    </div>
-                </div>
+            <div id="kec-select-container">
+                <h5 style="margin-right: 20px;">Pilih Kecamatan</h5>
+                <v-select
+                    style="max-width: 200px; min-width: 200px;"
+                    v-bind:on-change="onChangeKecamatan"
+                    v-model="selectedKecamatan" :options="kecamatan"></v-select>
+                <!--<button class="btn btn-default btn-lg" style="margin: 0 8px;">Chart</button>
+                <button class="btn btn-default btn-lg">Map</button>-->
             </div>
-
-            <div id="summary-panel" class="container-fluid well well-lg">
-                <div class="row">
-                    <div class="kategori-box col-sm-3">
+            <!-- <div v-if="state == 'chart'" id="chartContainer" style="height: 460px; margin: 0px auto;"></div> -->
+            <div v-if="state == 'map'" id="map" style="height: 500px;"></div>
+            <div class="container-fluid well">
+                <div class="row" style="padding-top: 12px; padding-bottom: 12px;">
+                    <div class="kategori-box col-sm-3 equal-box">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 Rangkuman Per Kategori
@@ -141,12 +48,15 @@
                                         <td>{{ it.nama }}</td>
                                         <td>{{ it.total }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                    </tr>
                                     {% endraw %}
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="akreditasi-box col-sm-3">
+                    <div class="akreditasi-box col-sm-3 equal-box">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 Rangkuman Akreditasi
@@ -169,8 +79,56 @@
                             </table>
                         </div>
                     </div>
+                    <div class="akreditasi-box col-sm-3 equal-box">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Swasta / Negri
+                            </div>
+                            <table class='table table-hover table-striped'>
+                                <thead>
+                                    <tr>
+                                        <td>Tipe</td>
+                                        <td>Jumlah</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% raw %}
+                                    <tr v-for="(it, i) in sn" :key="i">
+                                        <td>{{ it.sn }}</td>
+                                        <td>{{ it.total }}</td>
+                                    </tr>
+                                    {% endraw %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="akreditasi-box col-sm-3 equal-box">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Bangunan, Bantuan, Fasilitas
+                            </div>
+                            <table class='table table-hover table-striped'>
+                                <thead>
+                                    <tr>
+                                        <td>Tipe</td>
+                                        <td>Jumlah</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% raw %}
+                                    <tr v-for="(it, i) in bbf" :key="i">
+                                        <td>{{ it.kategori }}</td>
+                                        <td>{{ it.total }}</td>
+                                    </tr>
+                                    {% endraw %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            
         </div>
 
 		<!-- Footer -->
@@ -299,8 +257,9 @@
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -9.859565, lng: 124.278409},
-                    zoom: 16,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    zoom: 14,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    mapTypeControl: false
                 });
                 
                 var locations = [
@@ -332,14 +291,64 @@
         </script>
         <script src="/static/js/vue.js"></script>
         <script src="/static/js/axios.min.js"></script>
+        <script src="/static/js/canvasjs.min.js"></script>
         <script>
+            /** window.onload = function () {
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    exportEnabled: true,
+                    animationEnabled: true,
+                    title:{
+                        text: "State Operating Funds"
+                    },
+                    legend:{
+                        cursor: "pointer",
+                        itemclick: explodePie
+                    },
+                    data: [{
+                        type: "pie",
+                        showInLegend: true,
+                        toolTipContent: "{name}: <strong>{y}%</strong>",
+                        indexLabel: "{name} - {y}%",
+                        dataPoints: [
+                            { y: 26, name: "School Aid", exploded: true },
+                            { y: 20, name: "Medical Aid" },
+                            { y: 5, name: "Debt/Capital" },
+                            { y: 3, name: "Elected Officials" },
+                            { y: 7, name: "University" },
+                            { y: 17, name: "Executive" },
+                            { y: 22, name: "Other Local Assistance"}
+                        ]
+                    }]
+                });
+                chart.render();
+            }
+
+            function explodePie (e) {
+                if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                    e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+                } else {
+                    e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+                }
+                e.chart.render();
+
+            }
+            */
+        </script>
+        <script src="/static/js/vue-select.js"></script>
+        <script>
+            Vue.component('v-select', VueSelect.VueSelect);
             var vueApp = new Vue({
                 el: '#vueApp',
                 data: {
                     message: 'Hello Vue!',
                     kecamatan: [],
                     kategori: [],
-                    akreditasi: []
+                    akreditasi: [],
+                    sn: [],
+                    bbf: [],
+                    selectedKecamatan: 'SEMUA',
+                    state: 'map'
                 },
                 computed: {
                     selectedKec () {
@@ -351,17 +360,40 @@
                         .then(resp => resp.data)
                         .then(items => {
                             this.kecamatan = items.map(it => {
-                                return { name: it.nama, selected: true };
+                                return { label: it.nama, value: it.nama, selected: false };
                             });
+                            let kecs = items.map(it => it.nama);
+                            this.kecamatan.push({ label: 'SEMUA', value: 'SEMUA', selected: true });
+                            return kecs;
                         })
-                        .then(() => { this.reload(); });
+                        .then(kecs => { this.reload(kecs); });
                 },
                 methods: {
-                    reload () {
-                        axios.post('/app/api/summary.php', { kecamatan: this.selectedKec })
+                    onChangeKecamatan (val) {
+                        if (val == null) return;
+                        if (val == undefined) return;
+                        let allKec = this.kecamatan.map(it => it.value);
+                        if (val.value == 'SEMUA') {
+                            allKec.pop();
+                            return this.reload(allKec);
+                        }
+                        return this.reload([ val.value ]);
+                    },
+                    reload (kecs) {
+                        if (kecs.length == 0) {
+                            return;
+                        }
+                        if (kecs[0] == undefined) {
+                            return;
+                        }
+                        console.log('kecamatans', kecs);
+                        return axios.post('/app/api/summary.php', { kecamatan: kecs })
                             .then(resp => resp.data)
                             .then(items => {
+                                console.log(items.bbf);
                                 this.akreditasi = items.akreditasi;
+                                this.sn = items.sn;
+                                this.bbf = items.bbf;
                                 this.kategori = items.kategori.map(it => {
                                     switch (parseInt(it.kategori)) {
                                         case 1:
@@ -386,7 +418,7 @@
                                 console.log(err);
                             })
                             .then(() => {
-                                return this.getSelectedMap()
+                                return this.getSelectedMap(kecs)
                                     .then(items => { this.rebuildMarkers(items); });
                             });
                     },
@@ -396,6 +428,7 @@
                         });
                     },
                     rebuildMarkers (items) {
+                        console.log('Rebuild Markers', items);
                         this.removeMarkers();
                         gmarkers = [];
                         var marker, i;
@@ -415,15 +448,9 @@
                             })(marker, i));
                         }
                     },
-                    getSelectedMap () {
-                        return axios.post('/app/api/getSekolahByKecamatan.php', { kecamatan: this.selectedKec })
+                    getSelectedMap (kecs) {
+                        return axios.post('/app/api/getSekolahByKecamatan.php', { kecamatan: kecs })
                             .then(resp => resp.data);
-                    },
-                    changeSelected (i) {
-                        this.kecamatan[i].selected = !this.kecamatan[i].selected;
-                        Vue.nextTick(() => {
-                            this.reload();
-                        });
                     }
                 }
             });

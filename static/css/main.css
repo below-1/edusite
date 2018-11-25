@@ -1,7 +1,7 @@
 .user-left-nav .elem {
     font-size: 14px;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .user-left-nav .elem > a {
@@ -45,7 +45,7 @@
 }
 
 body {
-    font-size: 12px;
+    font-size: 14px;
     color: #333;
     /* font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; */
 }
@@ -211,13 +211,8 @@ body {
 }
 
 #kecamatan-panel {
-    position: absolute;
-    top: 60px;
-    left: 12px;
-    bottom: 20px;
     padding: 12px;
     background-color: rgba(250, 250, 250, 0.8);
-    width: 240px;
     z-index: 1111111;
 }
 
@@ -225,4 +220,15 @@ body {
     font-size: 14px;
     /* background-color: white; */
     /* padding: 12px; */
+}
+
+#kec-select-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 11111111;
 }

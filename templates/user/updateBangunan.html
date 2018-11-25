@@ -1,0 +1,63 @@
+{% extends "user/user.base.html" %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Input Data Bangunan Baru</div>
+        <div class="panel-body">
+            <form method="POST" action="/app/actions/updateBangunan.php">
+                <input type="number" name="id" value="{{ b.id }}" hidden/>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Nama</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nama" value="{{ b.nama }}" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Kategori</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="kategori">
+                            <option
+                              {% if (b.kategori == 1) %}
+                                selected
+                              {% endif %}
+                              value="1">Tambahan</option>
+                            <option
+                              {% if (b.kategori == 2) %}
+                                selected
+                              {% endif %}
+                              value="2">Rehabilitasi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Tahun</label>
+                    <div class="col-sm-8">
+                        <input type="number" min="1990" name="tahun" class="form-control"
+                          value="{{ b.tahun }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Kondisi</label>
+                    <div class="col-sm-8">
+                        <select name="kondisi" class="form-control">
+                            <option {% if (b.kondisi == 'SANGAT BURUK') %} selected {% endif %}>SANGAT BURUK</option>
+                            <option {% if (b.kondisi == 'BURUK') %} selected {% endif %} >BURUK</option>
+                            <option {% if (b.kondisi == 'NORMAL') %} selected {% endif %}>NORMAL</option>
+                            <option {% if (b.kondisi == 'BAIK') %} selected {% endif %}>BAIK</option>
+                            <option {% if (b.kondisi == 'SANGAT BAIK') %} selected {% endif %} >SANGAT BAIK</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-10">
+                    <button type="submit" class="btn btn-default">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

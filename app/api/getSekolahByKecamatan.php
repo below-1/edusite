@@ -10,7 +10,8 @@
     $selKec = implode(',', array_map(function ($it) { return "'$it'"; }, $selectedKec));
 
     $mysqli = new mysqli($DB_HOST, $DB_USER,$DB_PASSWORD, $DB_NAME);
-    $qResult = $mysqli->query("SELECT s.id, s.nama, s.latitude, s.longitude FROM sekolah s WHERE s.kecamatan in ($selKec)");
+    $qStr = "SELECT s.id, s.nama, s.latitude, s.longitude FROM sekolah s WHERE s.kecamatan in ($selKec)";
+    $qResult = $mysqli->query($qStr);
     $result = $qResult->fetch_all(MYSQLI_ASSOC);
     header('Content-Type: application/json');
     echo json_encode($result);

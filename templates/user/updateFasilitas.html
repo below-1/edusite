@@ -24,7 +24,13 @@
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Kondisi</label>
                     <div class="col-sm-8">
-                        <input type="text" name="kondisi" class="form-control" value="{{ f.kondisi|e }}">
+                        <select name="kondisi" class="form-control">
+                            <option {% if (f.kondisi == 'SANGAT BURUK') %} selected {% endif %}>SANGAT BURUK</option>
+                            <option {% if (f.kondisi == 'BURUK') %} selected {% endif %} >BURUK</option>
+                            <option {% if (f.kondisi == 'NORMAL') %} selected {% endif %}>NORMAL</option>
+                            <option {% if (f.kondisi == 'BAIK') %} selected {% endif %}>BAIK</option>
+                            <option {% if (f.kondisi == 'SANGAT BAIK') %} selected {% endif %} >SANGAT BAIK</option>
+                        </select>
                     </div>
                 </div>
 

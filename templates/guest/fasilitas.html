@@ -21,14 +21,6 @@
                             <td>{{ item.nama|e }}</td>
                             <td>{{ item.jumlah|e }}</td>
                             <td>{{ item.kondisi|e }}</td>
-                            <td>
-                                <a href="/app/user/index.php?menu=fasilitas&page=update&id={{ item.id|e }}" class="btn btn-sm btn-primary">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <button class="btn btn-sm btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

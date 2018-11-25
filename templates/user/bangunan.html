@@ -33,7 +33,13 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Kondisi</label>
                     <div class="col-sm-8">
-                        <input type="text" name="kondisi" class="form-control">
+                        <select name="kondisi" class="form-control">
+                            <option>SANGAT BURUK</option>
+                            <option>BURUK</option>
+                            <option>NORMAL</option>
+                            <option>BAIK</option>
+                            <option>SANGAT BAIK</option>
+                        </select>
                     </div>
                 </div>
 
@@ -46,7 +52,7 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">Data Fasilitas</div>
+        <div class="panel-heading">Data Bangunan</div>
         <div class="panel-body">
             <table class="table table-responsive">
                 <thead>
@@ -66,7 +72,7 @@
                             <td>{{ item.tahun|e }}</td>
                             <td>{{ item.kondisi|e }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary">
+                                <a class="btn btn-sm btn-primary" href="/app/user/index.php?menu=bangunan&page=update&id={{ item.id|e }}">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                                 <button class="btn btn-sm btn-danger">

@@ -1,0 +1,116 @@
+{% extends "user/user.base.html" %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Input Data Pegawai</div>
+        <div class="panel-body">
+            <form method="POST" action="/app/actions/updatePegawai.php">
+                <input name="id" value="{{ f.id }}" hidden/>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Nama</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nama" value="{{ f.nama }}" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">PNS / NON PNS</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="pnsNonPns">
+                            <option {% if (f.kondisi == 'SANGAT BURUK') %} selected {% endif %}>SANGAT BURUK</option>
+                            <option {% if (f.kondisi == 'BURUK') %} selected {% endif %} >BURUK</option>
+
+                            <option value="1">PNS</option>
+                            <option value="0">Non PNS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">NIP/NUPTK</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nip" class="form-control" value="{{ f.nip }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Gol/Ruangan</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="golongan" class="form-control" value="{{ f.gol }}" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">L/P</label>
+                    <div class="col-sm-8">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="jk" value="1"
+                                    {% if (f.jk == 1) %}
+                                        checked
+                                    {% endif %}
+                                    > Laki - Laki
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="jk" value="0"
+                                    {% if (f.jk == 0) %}
+                                        checked
+                                    {% endif %}
+                                > Perempuan
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Tempat Lahir</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="tempatLahir" class="form-control" value="{{ f.tempatLahir }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Tanggal Lahir</label>
+                    <div class="col-sm-8">
+                        <input type="date" name="tanggalLahir" class="form-control" value="{{ f.tanggalLahir|date('Y-m-d') }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Jabatan</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="jabatan" class="form-control" value="{{f.jabatan|e }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Status</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="status" class="form-control" value="{{f.status|e }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Pendidikan Terakhir</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="pendTerakhir">
+                            <option value="1" {% if(f.pendTerakhir == 1) %} selected {% endif %} >SLTA</option>
+                            <option value="2" {% if(f.pendTerakhir == 2) %} selected {% endif %}>D1</option>
+                            <option value="3" {% if(f.pendTerakhir == 3) %} selected {% endif %}>D2</option>
+                            <option value="4" {% if(f.pendTerakhir == 4) %} selected {% endif %}>S1</option>
+                            <option value="5" {% if(f.pendTerakhir == 5) %} selected {% endif %}>S2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-default">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

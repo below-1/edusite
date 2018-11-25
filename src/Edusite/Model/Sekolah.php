@@ -178,6 +178,10 @@ class Sekolah {
      * @Column(type="integer", nullable=true)
      */
     protected $paud34;
+    /**
+     * @Column(type="string", nullable=true)
+     */
+    protected $negriSwasta;
 
     public function getId() { return $this->id; }
     public function getKategori() { return $this->kategori; }
@@ -210,6 +214,7 @@ class Sekolah {
     public function getUsername() { return $this->username; }
     public function getPassword() { return $this->password; }
     public function getImUrl() { return $this->imUrl; }
+    public function getNegriSwasta() { return $this->negriSwasta; }
 
     public function getPaudLakiLaki() { return $this->paudLakiLaki; }
     public function getPaudPerempuan() { return $this->paudPerempuan; }
@@ -252,4 +257,6 @@ class Sekolah {
     public function setPaudPerempuan($val) { $this->paudPerempuan = $val; }
     public function setPaud23($val) { $this->paud23 = $val; }
     public function setPaud34($val) { $this->paud34 = $val; }
+
+    public function setNegriSwasta($val) { return $this->negriSwasta = $val; }
 }

@@ -62,7 +62,7 @@
     }
 
     if ($menu == 'bantuan') {
-        $query = $entity_manager->createQuery("SELECT f FROM Edusite\Model\Sekolah s JOIN Edusite\Model\Bangunan f WHERE f.sekolah = $sekolahId ORDER BY f.nama ASC");
+        $query = $entity_manager->createQuery("SELECT f FROM Edusite\Model\Sekolah s JOIN Edusite\Model\Bantuan f WHERE f.sekolah = $sekolahId ORDER BY f.nama ASC");
         $selectResult = $query->getResult();
         $data['items'] = $selectResult;
     }
