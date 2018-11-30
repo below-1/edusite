@@ -98,8 +98,7 @@
     $bantuanCount = $qResultBantuan->fetch_all(MYSQLI_ASSOC);
     $fasilitasCount = $qResultFasilitas->fetch_all(MYSQLI_ASSOC);
 
-    // var_dump($bangunanCount);
-
+    // 4. Bantuan, Fasilitas, Bangunan
     for ($i = 0; $i < count($allKategori); $i++) {
         $currKategori = $allKategori[$i];
         $bbf[$currKategori] = 0;
@@ -130,12 +129,30 @@
             'total' => $v
         ));
     }
+
+    // 5. Jumlah Siswa
+    $selKec = implode(',', array_map(function ($it) { return "'$it'"; }, $selectedKec));
+    $qResult = $mysqli->query("SELECT s.kategori as kategori, SUM(s.JumlahSiswa) as total FROM sekolah s WHERE s.kecamatan in ($selKec) GROUP BY s.kategori");
+    $jumlahCount = $qResult->fetch_all(MYSQLI_ASSOC);
+
+    $allKategori = [1, 2, 3, 4];
+    $existKey = array_map(function ($kc) {  return $kc['kategori']; }, $jumlahCount);
+    // Fill empty values kategoriCount
+    foreach ($allKategori as $k) {
+        if ( !in_array($k, $existKey) ) {
+            array_push($jumlahCount, [
+                'kategori' => $k,
+                'total' => 0
+            ]);
+        }
+    }
     
     $result = [
         'kategori' => $kategoriCount,
         'akreditasi' => $akreditasiCount,
         'sn' => $snCount,
-        'bbf' => $bbf_result
+        'bbf' => $bbf_result,
+        'jumlahCount' => $jumlahCount
     ];
     header('Content-Type: application/json');
     echo json_encode($result);

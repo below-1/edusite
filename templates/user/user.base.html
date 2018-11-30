@@ -11,7 +11,7 @@
 		<!-- /Header -->
 
 		<!-- Home -->
-		<div id="home" class="hero-area" style="height: 120px; margin-top: 50px;">
+		<div id="home" class="hero-area" style="height: 220px;">
 			<!-- Backgound Image -->
 			<div class="bg-image bg-parallax overlay" style="background-image:url(/static/img/home-background.jpg)"></div>
 			<!-- /Backgound Image -->
@@ -53,76 +53,44 @@
 
 					<div class="col-md-3">
 						{% if (sekolah.kategori == 3 or sekolah.kategori == 4) %}
-							<div class="user-left-nav visible-md visible-lg" data-spy="affix" data-offset-top="60" data-offset-bottom="300">
-								<div class="elem">
-									<a href="/app/user/index.php?menu=biodata">Biodata Sekolah</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=alamat">Alamat</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=siswaperkelas">Jumlah Siswa Per Kelas</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=siswaperrb">Jumlah Siswa Per Rombongan Belajar</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=lanjutstudi">Melanjutkan Studi</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=tingkatlulus">Tingkat Kelulusan</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=fasilitas">Fasilitas Olahraga</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=pegawaipns">Data Pegawai</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=bangunan">Bangunan</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=bantuan">Bantuan</a>
-								</div>
-								<div class="elem">
-									<a href="/app/user/index.php?menu=image">Gambar</a>
-								</div>
+							<div class="panel panel-danger user-left-nav">
+								<div class="panel-heading">Menu</div>
+								<ul class="nav nav-pills nav-stacked">
+									<li>
+										<a href="/app/user/index.php?menu=biodata">Biodata Sekolah</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=alamat">Alamat</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=siswaperkelas">Jumlah Siswa Per Kelas</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=siswaperrb">Jumlah Siswa Per Rombongan Belajar</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=lanjutstudi">Melanjutkan Studi</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=tingkatlulus">Tingkat Kelulusan</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=fasilitas">Fasilitas Olahraga</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=pegawaipns">Data Pegawai</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=bangunan">Bangunan</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=bantuan">Bantuan</a>
+									</li>
+									<li>
+										<a href="/app/user/index.php?menu=image">Gambar</a>
+									</li>
+								</ul>
 							</div>
-							<ul class="nav nav-pills">
-								<li class="elem">
-									<a href="/app/user/index.php?menu=biodata">Biodata Sekolah</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=alamat">Alamat</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=siswaperkelas">Jumlah Siswa Per Kelas</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=siswaperrb">Jumlah Siswa Per Rombongan Belajar</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=lanjutstudi">Melanjutkan Studi</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=tingkatlulus">Tingkat Kelulusan</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=fasilitas">Fasilitas Olahraga</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=pegawaipns">Data Pegawai</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=bangunan">Bangunan</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=bantuan">Bantuan</a>
-								</li>
-								<li class="elem">
-									<a href="/app/user/index.php?menu=image">Gambar</a>
-								</li>
-							</ul>
 
 							<div class="user-left-nav visible-xs visible-sm">
 								<div class="elem">
@@ -232,6 +200,7 @@
 		<!-- /preloader -->
 
 		{{ include('commons/bottom-script.html') }}
+		{% block extraScripts %}{% endblock %}
 		
 	</body>
 </html>

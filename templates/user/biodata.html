@@ -4,12 +4,12 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Biodata</div>
         <div class="panel-body">
-            <form class="form-horizontal" method="POST" action="/app/actions/saveBiodata.php">
+            <form id="user-form" class="form-horizontal" method="POST" action="/app/actions/saveBiodata.php">
 
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Nama Sekolah</label>
                     <div class="col-sm-8">
-                        <input type="text" name="nama" class="form-control" value="{{ sekolah.nama }}">
+                        <input type="text" name="nama" class="form-control" value="{{ sekolah.nama }}" required>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Tahun Didirikan</label>
                     <div class="col-sm-8">
-                        <input type="number" name="tahunBerdiri" min="1900" max="2030" class="form-control" value="{{ sekolah.tahunBerdiri }}">
+                        <input type="number" name="tahunBerdiri" min="1900" max="2030" class="form-control" value="{{ sekolah.tahunBerdiri }}" required>
                     </div>
                 </div>
 
@@ -62,7 +62,13 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Status Sekolah</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" name="statusAkreditasi" value="{{ sekolah.statusAkreditasi }}">
+                        <select name="statusAkreditasi" class="form-control">
+                            <option {% if (sekolah.statusAkreditasi == 'A') %} selected {% endif %}>A</option>
+                            <option {% if (sekolah.statusAkreditasi == 'B') %} selected {% endif %}>B</option>
+                            <option {% if (sekolah.statusAkreditasi == 'C') %} selected {% endif %}>C</option>
+                            <option {% if (sekolah.statusAkreditasi == 'D') %} selected {% endif %}>D</option>
+                            <option {% if (sekolah.statusAkreditasi == 'BELUM') %} selected {% endif %}>BELUM</option>
+                        </select>
                     </div>
                 </div>
 
@@ -113,4 +119,11 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block extraScripts %}
+    <script src="/static/js/jquery.validate.min.js"></script>
+    <script>
+        $('#user-form').validate();
+    </script>
 {% endblock %}

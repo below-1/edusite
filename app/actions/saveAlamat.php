@@ -7,7 +7,7 @@
         $alamat = $_POST['alamat'];
         $kelurahanDesa = $_POST['kelurahanDesa'];
         $kabupaten = $_POST['kabupaten'];
-        $provinsi = $_POST['provinsi'];
+        $provinsi = 'NTT';
         $kodePos = $_POST['kodePos'];
         $telepon = $_POST['telepon'];
         $email = $_POST['email'];

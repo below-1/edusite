@@ -73,46 +73,52 @@
             </form>
         </div>
     </div>
-    <table class="table table-condensed table-striped table-responsive">
-        <thead>
-            <tr>
-                <th>Tahun</th>
-                <th>Kelas I</th>
-                <th>Kelas II</th>
-                <th>Kelas III</th>
 
-                {% if isSd %}
-                <th>Kelas IV</th>
-                <th>Kelas V</th>
-                <th>Kelas VI</th>
-                {% endif %}
-                <th>
-                    
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Data Siswa Per Rombongan Belajar
+        </div>
+        <table class="table table-striped table-responsive">
+            <thead>
                 <tr>
-                    <td>{{ item.tahun|e }}</td>
-                    <td>{{ item.rb1|e }}</td>
-                    <td>{{ item.rb2|e }}</td>
-                    <td>{{ item.rb3|e }}</td>
+                    <th>Tahun</th>
+                    <th>Kelas I</th>
+                    <th>Kelas II</th>
+                    <th>Kelas III</th>
+
                     {% if isSd %}
-                    <td>{{ item.rb4|e }}</td>
-                    <td>{{ item.rb5|e }}</td>
-                    <td>{{ item.rb6|e }}</td>
+                    <th>Kelas IV</th>
+                    <th>Kelas V</th>
+                    <th>Kelas VI</th>
                     {% endif %}
-                    <td>
-                        <button class="btn btn-sm btn-primary">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button class="btn btn-sm btn-danger">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </td>
+                    <th>
+                        
+                    </th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.tahun|e }}</td>
+                        <td>{{ item.rb1|e }}</td>
+                        <td>{{ item.rb2|e }}</td>
+                        <td>{{ item.rb3|e }}</td>
+                        {% if isSd %}
+                        <td>{{ item.rb4|e }}</td>
+                        <td>{{ item.rb5|e }}</td>
+                        <td>{{ item.rb6|e }}</td>
+                        {% endif %}
+                        <td>
+                            <button class="btn btn-sm btn-primary">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button class="btn btn-sm btn-danger">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
